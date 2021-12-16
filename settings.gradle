@@ -4,4 +4,5 @@ include 'config-server'
 include 'greeting-service'
 include 'eureka-server'
 include 'name-service'
+include 'user-service'
 
