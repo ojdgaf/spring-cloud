@@ -7,6 +7,9 @@ import java.util.UUID;
 
 import com.ojdgaf.cloud.user.User;
 import com.ojdgaf.cloud.user.UserService;
+import com.ojdgaf.cloud.user.exception.NotDeletedException;
+import com.ojdgaf.cloud.user.exception.NotFoundException;
+import com.ojdgaf.cloud.user.exception.NotSavedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -22,8 +25,8 @@ public class UserFileSystemService implements UserService {
     public User find(final String id) {
         try {
             return User.READER.readValue(getFile(id));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (final IOException e) {
+            throw new NotFoundException();
         }
     }
 
@@ -37,14 +40,18 @@ public class UserFileSystemService implements UserService {
         try {
             User.WRITER.writeValue(getFile(id), user.setId(id));
             return user;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (final IOException e) {
+            throw new NotSavedException(e);
         }
     }
 
     @Override
     public void delete(final String id) {
-        getFile(id).delete();
+        try {
+            getFile(id).delete();
+        } catch (final Exception e) {
+            throw new NotDeletedException(e);
+        }
     }
 
     private File getFile(final String id) {
