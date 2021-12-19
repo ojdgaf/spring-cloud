@@ -139,7 +139,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="user-service" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-cloud.user-service.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ojdgaf.cloud.user.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ojdgaf.cloud.user.UserApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SHORTEN_COMMAND_LINE" value="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
+      <item itemvalue="Spring Boot.user-service" />
       <item itemvalue="Spring Boot.config-server" />
       <item itemvalue="Spring Boot.eureka-server" />
       <item itemvalue="Spring Boot.name-service" />
